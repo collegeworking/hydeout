@@ -9,13 +9,21 @@ layout: page
 <ul class="posts-list">
   {% assign category = page.category | default: page.title %}
   {% for post in site.categories[category] %}
-    <li>
-      <h3>
-        <a href="{{ site.baseurl }}{{ post.url }}">
-          {{ post.title }}
-          <small>{{ post.date | date_to_string }}</small>
-        </a>
-      </h3>
-    </li>
+  
+  <header>
+    <h1 class="post-title">{{ post.title }}</h1>
+  </header>
+  <div class="content">
+    {% include post-meta.html post=post %}
+  
+    <div class="post-body">
+      {{ content }}
+      {% include post-tags.html post=post %}
+    </div>
+  
+    {% include comments.html %}
+    {% include related_posts.html %}
+  </div>
+  
   {% endfor %}
 </ul>
